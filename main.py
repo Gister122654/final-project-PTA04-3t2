@@ -1,6 +1,7 @@
 from PyQt6.QtWidgets import QApplication, QMainWindow, QWidget # them widget từ pyqt6
 from PyQt6 import uic # them chuc nang load ui
 import sys # them thu vien dieu khien he thong
+import webbrowser
 
 #lop Trang Chu
 class HomeDashboard(QMainWindow):
@@ -8,14 +9,27 @@ class HomeDashboard(QMainWindow):
         super().__init__()
         uic.loadUi("ui-GiaoDien/home.ui", self)
         # nut de ve trang chu
-        self.btnHome.clicked.connect(self.showHome)
+        x = None
+        self.stackedWidget.setCurrentIndex(0)
+        self.btnMore.clicked.connect(lambda _, item=x: self.pshowItem(LinkItem= "https://shopvnb.com/"))
+        self.btnElse.clicked.connect(lambda _, item=x: self.pshowItem(LinkItem = "https://shopvnb.com/san-pham"))
         # nut de mo thong tin ca nhan
-        self.btnProfile.clicked.connect(self.showProfile)
-    
+        # self.btnProfile.clicked.connect(self.showProfile)
+        self.btnRyuga.clicked.connect(self.showRyuga)
+        self.btnBack.clicked.connect(self.showHome)
+        self.btnBuy.clicked.connect(lambda _, item=x: self.pbuyItem(LinkItem= "https://shopvnb.com/vot-cau-long-victor-ryuga-metallic-china-open-2024.html"))
+        self.btnWrap.clicked.connect(lambda _, item=x: self.pshowItem(LinkItem= "https://shopvnb.com/quan-lot-can-yonex-ac010cr.html"))
+        self.btn88dPlay.clicked.connect(lambda _, item=x: self.pshowItem(LinkItem= "https://shopvnb.com/vot-cau-long-yonex-astrox-88d-play-chinh-hang.html"))
+        self.btnForza.clicked.connect(lambda _, item=x: self.pshowItem(LinkItem ="https://shopvnb.com/vot-cau-long-forza-nano-power-4000-chinh-hang.html"))
+    def pbuyItem(self, LinkItem):
+        webbrowser.open(LinkItem)
+    def pshowItem(self, LinkItem):
+        webbrowser.open(LinkItem)
+    def showRyuga(self):
+        self.stackedWidget.setCurrentIndex(1)
     def showHome(self):
-        self.stackedMenu.setCurrentIndex(1)
-    def showProfile(self):
-        self.stackedMenu.setCurrentIndex(2)
+        self.stackedWidget.setCurrentIndex(0)
+        
 
 #Lop Dang Ky
 class SignUp(QMainWindow):
